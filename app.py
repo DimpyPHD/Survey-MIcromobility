@@ -9,6 +9,30 @@ import csv
 import random
 import os
 from PIL import Image, UnidentifiedImageError
+
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
+
+def save_to_google_sheets(data_dict):
+    try:
+        scope = ["https://spreadsheets.google.com/feeds",
+                 "https://www.googleapis.com/auth/drive"]
+        creds = ServiceAccountCredentials.from_json_keyfile_name("gcp_credentials.json", scope)
+        client = gspread.authorize(creds)
+
+        sheet = client.open("Micromobility Responses").sheet1  # make sure the sheet name matches
+        header = list(data_dict.keys())
+        values = list(data_dict.values())
+
+        # Add header if empty
+        if sheet.row_count <= 1 and not sheet.cell(1, 1).value:
+            sheet.insert_row(header, 1)
+
+        sheet.append_row(values)
+
+    except Exception as e:
+        print("❌ Google Sheets Save Failed:", e)
+
 # ----------- MOBILE RESPONSIVE PATCH -----------
 # Custom center alignment CSS
 st.markdown("""
@@ -374,9 +398,11 @@ elif st.session_state.page == "demographics":
                 data.update(st.session_state.demographic_data)
                 data.update(st.session_state.responses)
 
+             # Save to JSON
                 with open(f"responses_{data['id']}.json", "w") as f:
                     json.dump(data, f)
 
+                # Save to CSV
                 csv_file = "responses.csv"
                 write_header = not os.path.exists(csv_file)
                 with open(csv_file, "a", newline="", encoding="utf-8-sig") as f:
@@ -384,6 +410,13 @@ elif st.session_state.page == "demographics":
                     if write_header:
                         writer.writeheader()
                     writer.writerow(data)
+
+                # ✅ Save to Google Sheets
+# ✅ Save to Google Sheets
+                save_to_google_sheets(data)
+                
+
+
 
                 st.session_state.page = "thankyou"
                 st.rerun()
