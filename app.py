@@ -13,32 +13,32 @@ from PIL import Image, UnidentifiedImageError
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
-def save_to_google_sheets(data_dict):
-    try:
-        import gspread
-        from oauth2client.service_account import ServiceAccountCredentials
+import gspread
+from google.oauth2.service_account import Credentials
 
-        scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-        creds = ServiceAccountCredentials.from_json_keyfile_name("gcp_credentials.json", scope)
+def save_to_google_sheets(data):
+    try:
+        scope = [
+            "https://www.googleapis.com/auth/spreadsheets",
+            "https://www.googleapis.com/auth/drive",
+        ]
+        creds = Credentials.from_service_account_file("gcp_credentials.json", scopes=scope)
         client = gspread.authorize(creds)
 
-        st.info("✅ Authenticated with Google Sheets")
-
+        # 🔁 Change to your actual sheet name
         sheet = client.open("Micromobility Responses").sheet1
-        st.info("✅ Opened Google Sheet successfully")
 
-        header = list(data_dict.keys())
-        values = list(data_dict.values())
+        # Get headers from first row
+        headers = sheet.row_values(1)
+        if not headers:
+            headers = list(data.keys())
+            sheet.append_row(headers)
 
-        if sheet.row_count <= 1 and not sheet.cell(1, 1).value:
-            sheet.insert_row(header, 1)
-            st.info("🧾 Header added to sheet")
-
-        sheet.append_row(values)
+        row = [str(data.get(h, "")) for h in headers]
+        sheet.append_row(row)
         st.success("✅ Response saved to Google Sheets")
-
     except Exception as e:
-        st.error(f"❌ Google Sheets Save Failed: {e}")
+        st.error(f"❌ Failed to save to Google Sheets: {e}")
 
 
 # ----------- MOBILE RESPONSIVE PATCH -----------
