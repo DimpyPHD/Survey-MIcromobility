@@ -1,0 +1,64 @@
+Task,Alternatives,"In-vehicle Time
+(in minutes)","In-vehicle Cost 
+(in INR)","Waiting Time
+ (in minutes)"
+1,E-rickshaw,15,20,10
+1,Public Bike Sharing System,10,40,10
+1,Walking,20,0,0
+2,E-rickshaw,15,20,5
+2,Public Bike Sharing System,15,20,5
+2,Walking,30,0,0
+3,E-rickshaw,10,40,10
+3,Public Bike Sharing System,5,20,10
+3,Walking,30,0,0
+4,E-rickshaw,10,60,10
+4,Public Bike Sharing System,10,20,5
+4,Walking,25,0,0
+5,E-rickshaw,10,60,10
+5,Public Bike Sharing System,10,40,5
+5,Walking,20,0,0
+6,E-rickshaw,20,60,15
+6,Public Bike Sharing System,10,40,2
+6,Walking,20,0,0
+7,E-rickshaw,15,40,5
+7,Public Bike Sharing System,10,10,2
+7,Walking,25,0,0
+8,E-rickshaw,20,40,10
+8,Public Bike Sharing System,15,20,5
+8,Walking,20,0,0
+9,E-rickshaw,20,40,10
+9,Public Bike Sharing System,10,10,10
+9,Walking,25,0,0
+10,E-rickshaw,10,20,10
+10,Public Bike Sharing System,10,40,5
+10,Walking,25,0,0
+11,E-rickshaw,10,20,10
+11,Public Bike Sharing System,15,20,5
+11,Walking,30,0,0
+12,E-rickshaw,20,60,10
+12,Public Bike Sharing System,5,10,5
+12,Walking,25,0,0
+13,E-rickshaw,15,20,5
+13,Public Bike Sharing System,15,20,2
+13,Walking,20,0,0
+14,E-rickshaw,15,40,5
+14,Public Bike Sharing System,10,40,5
+14,Walking,20,0,0
+15,E-rickshaw,15,40,10
+15,Public Bike Sharing System,10,20,5
+15,Walking,20,0,0
+16,E-rickshaw,20,40,5
+16,Public Bike Sharing System,5,20,10
+16,Walking,20,0,0
+17,E-rickshaw,15,40,10
+17,Public Bike Sharing System,15,10,5
+17,Walking,25,0,0
+18,E-rickshaw,15,60,10
+18,Public Bike Sharing System,15,20,2
+18,Walking,20,0,0
+19,E-rickshaw,10,40,15
+19,Public Bike Sharing System,10,20,2
+19,Walking,20,0,0
+20,E-rickshaw,10,20,5
+20,Public Bike Sharing System,10,40,10
+20,Walking,25,0,0
