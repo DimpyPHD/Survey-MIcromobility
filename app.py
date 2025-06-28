@@ -325,7 +325,7 @@ elif st.session_state.page == "demographics":
     # --------- Page 1 ---------
     if step == 0:
         with st.form("demographics_page_1"):
-            st.subheader("🔹 General Information")
+            st.subheader("🔹 General Informatio")
 
             residence = st.text_input("🏙️ Place of current residence")
 
