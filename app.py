@@ -15,23 +15,31 @@ from oauth2client.service_account import ServiceAccountCredentials
 
 def save_to_google_sheets(data_dict):
     try:
-        scope = ["https://spreadsheets.google.com/feeds",
-                 "https://www.googleapis.com/auth/drive"]
+        import gspread
+        from oauth2client.service_account import ServiceAccountCredentials
+
+        scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
         creds = ServiceAccountCredentials.from_json_keyfile_name("gcp_credentials.json", scope)
         client = gspread.authorize(creds)
 
-        sheet = client.open("Micromobility Responses").sheet1  # make sure the sheet name matches
+        st.info("✅ Authenticated with Google Sheets")
+
+        sheet = client.open("Micromobility Responses").sheet1
+        st.info("✅ Opened Google Sheet successfully")
+
         header = list(data_dict.keys())
         values = list(data_dict.values())
 
-        # Add header if empty
         if sheet.row_count <= 1 and not sheet.cell(1, 1).value:
             sheet.insert_row(header, 1)
+            st.info("🧾 Header added to sheet")
 
         sheet.append_row(values)
+        st.success("✅ Response saved to Google Sheets")
 
     except Exception as e:
-        print("❌ Google Sheets Save Failed:", e)
+        st.error(f"❌ Google Sheets Save Failed: {e}")
+
 
 # ----------- MOBILE RESPONSIVE PATCH -----------
 # Custom center alignment CSS
@@ -413,10 +421,7 @@ elif st.session_state.page == "demographics":
 
                 # ✅ Save to Google Sheets
 # ✅ Save to Google Sheets
-                save_to_google_sheets(data)
-                
-
-
+                save_to_google_sheets(data)        
 
                 st.session_state.page = "thankyou"
                 st.rerun()
