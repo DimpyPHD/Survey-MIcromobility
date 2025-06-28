@@ -1,0 +1,13 @@
+[theme]
+base = "dark"
+
+[server]
+enableStaticServing = true
+enableXsrfProtection = false
+enableCORS = false
+
+[browser]
+gatherUsageStats = false
+
+[ui]
+hideTopBar = true
