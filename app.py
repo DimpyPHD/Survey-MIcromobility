@@ -197,7 +197,7 @@ elif st.session_state.page == "survey":
         task_id = user_tasks[answered]
 
         st.subheader(f"Scenario {answered + 1} of {total_tasks}")
-        st.markdown("Please select the most likely travel option for this short trip (up to 5 km):")
+        st.markdown("Suppose you have just arrived from a transit facility and have to reach your destination which is about 5 km away. What modes will you prefer?")
 
         subset = df[df[task_col] == task_id].copy().reset_index(drop=True)
 
